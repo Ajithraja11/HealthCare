@@ -85,11 +85,9 @@ public class Enrollee {
 		this.phoneNumber = phoneNumber;
 	}
 
-
 	public List<Dependent> getDependents() {
 		return dependents;
 	}
-
 
 	public void setDependents(List<Dependent> dependents) {
 		this.dependents = dependents;
@@ -102,6 +100,5 @@ public class Enrollee {
 		
 		dependents.add(dependent);
 	}
-	
 	
 }

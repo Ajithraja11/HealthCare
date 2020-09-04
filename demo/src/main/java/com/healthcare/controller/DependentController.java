@@ -1,5 +1,7 @@
 package com.healthcare.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,30 +14,33 @@ import org.springframework.web.bind.annotation.RestController;
 import com.healthcare.entity.Dependent;
 import com.healthcare.service.DependentService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class DependentController {
 
 	@Autowired
 	private DependentService newDependentService;
 	
-	//adding a new dependent to an enrollee
 		@PostMapping("/dependent")
-		public ResponseEntity<?> createNewDependent(@RequestBody Dependent newDependent)
+		public List<ResponseEntity<?>> createNewDependent(@RequestBody Dependent[] newDependent)
 		{
-			return newDependentService.createNewDependent(newDependent);
-			
+			log.info("Inside Dependent controller createNewDependent");
+			return newDependentService.createNewDependent(newDependent);	
 		}
-	//updating a dependent from a enrollee
+	
 		@PutMapping("/dependent")
 		public ResponseEntity<?> updateDependent(@RequestBody Dependent newDependent)
 		{
+			log.info("Inside Dependent controller updateDependent");
 			return newDependentService.updateDependent(newDependent);
 		}
 		
-	//deleting a depedent from a enrollee
 		@DeleteMapping("/dependent/{enrolleeID}/{dependentID}")
 		public ResponseEntity<?> deleteDependent(@PathVariable int enrolleeID,@PathVariable int dependentID)
 		{
+			log.info("Inside Dependent controller deleteDependent");
 			return newDependentService.deleteDependent( enrolleeID, dependentID);
 		}	
 }
