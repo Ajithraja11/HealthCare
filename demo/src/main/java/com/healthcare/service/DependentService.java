@@ -2,6 +2,7 @@ package com.healthcare.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.healthcare.entity.Dependent;
 import com.healthcare.repository.DependentDaoImpl;
 import com.healthcare.repository.EnrolleeDaoImpl;
-import com.healthcare.validator.Validator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,7 @@ public class DependentService {
 	@Autowired 
 	private EnrolleeDaoImpl newEnrolleeDaoImpl;
 	
-	Validator validator;
+	
 
 	public List<ResponseEntity<?>> createNewDependent(Dependent[] newDependent)
 	{
@@ -99,17 +99,17 @@ public class DependentService {
 	
 	public boolean validateDependent(Dependent newDependent)
 	{
-		if(validator.checkName(newDependent.getName()))
+		if(newDependent.getName()==null || newDependent.getName().trim().length()==0)
 		{
 			log.error("Dependent Name Must be provided");
 			return false;
 		}
-		if(validator.checkBirthDate(newDependent.getBirthDate()))
+		if(newDependent.getBirthDate()==null)
 		{
 			log.error("Invalid Dependent Birthdate provided");
 			return false;
 		}
-		if(validator.checkPhoneNumber(newDependent.getPhoneNumber()))
+		if(Pattern.matches(".*[a-zA-Z&%^$@!].*",newDependent.getPhoneNumber()))
 		{
 			log.error("Invalid Dependent Phone Number provided");
 			return false;

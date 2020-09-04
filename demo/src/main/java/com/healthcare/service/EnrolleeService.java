@@ -2,6 +2,7 @@ package com.healthcare.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.healthcare.entity.Enrollee;
 import com.healthcare.repository.EnrolleeDaoImpl;
-import com.healthcare.validator.Validator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,7 @@ public class EnrolleeService {
 	@Autowired
 	private EnrolleeDaoImpl newEnrolleeDaoImpl;
 	
-	Validator validator;
+
 	
 	public List<ResponseEntity<?>> createEnrollee(Enrollee[] newEnrolle)
 	{
@@ -92,7 +92,7 @@ public class EnrolleeService {
 	
 	public boolean enrolleeValidate(Enrollee theEnrolle)
 	{
-		if(validator.checkName(theEnrolle.getName()))
+		if(theEnrolle.getName()==null || theEnrolle.getName().trim().length()==0)
 		{
 			log.error("Invalid Enrollee Name provided");
 			return false;
@@ -102,12 +102,12 @@ public class EnrolleeService {
 			log.error("Invalid Enrollee Statusr provided");
 			return false;
 		}
-		if(validator.checkBirthDate(theEnrolle.getBirthDate()))//validate birthdate
+		if((theEnrolle.getBirthDate()==null))//validate birthdate
 		{
 			log.error("Invalid Enrollee Birthdate provided");
 			return false;
 		}	
-		if(validator.checkPhoneNumber(theEnrolle.getPhoneNumber()))
+		if(Pattern.matches(".*[a-zA-Z&%^$@!].*",theEnrolle.getPhoneNumber()))
 		{
 			log.error("Invalid Enrollee Phone Number provided");
 			return false;
