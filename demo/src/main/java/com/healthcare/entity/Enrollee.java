@@ -45,6 +45,27 @@ public class Enrollee {
 
 	public Enrollee() {}
 	
+	
+	
+	public Enrollee(int id, String name, Boolean status, Date birthDate) {
+		
+		this.id = id;
+		this.name = name;
+		this.status = status;
+		this.birthDate = birthDate;
+	}
+
+
+
+	public Enrollee(String name, Boolean status, Date birthDate) {
+	
+		this.name = name;
+		this.status = status;
+		this.birthDate = birthDate;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

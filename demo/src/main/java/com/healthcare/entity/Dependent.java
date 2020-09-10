@@ -38,6 +38,27 @@ public class Dependent {
 
 	public Dependent() {}
 	
+	
+	
+	public Dependent(int id, String name, Date birthDate, int enrollee_id) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.birthDate = birthDate;
+		this.enrollee_id = enrollee_id;
+	}
+
+
+
+	public Dependent(String name, Date birthDate, int enrollee_id) {
+		super();
+		this.name = name;
+		this.birthDate = birthDate;
+		this.enrollee_id = enrollee_id;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

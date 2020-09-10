@@ -21,8 +21,6 @@ public class EnrolleeService {
 	@Autowired
 	private EnrolleeDaoImpl newEnrolleeDaoImpl;
 	
-
-	
 	public List<ResponseEntity<?>> createEnrollee(Enrollee[] newEnrolle)
 	{
 		List<ResponseEntity<?>> list=new ArrayList<>();
